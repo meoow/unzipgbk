@@ -30,13 +30,12 @@ func init() {
 		os.Exit(0)
 	}
 	flag.StringVar(&encoding, "c", "", "Forcing codec instead of auto detecting")
-	log.SetOutput(os.Stderr)
 }
 
 func main() {
 	flag.Parse()
 	if flag.NArg() == 0 {
-		flag.PrintDefaults()
+		flag.Usage()
 		os.Exit(1)
 	}
 
