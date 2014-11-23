@@ -16,7 +16,7 @@ import (
 
 type SortFile []*zip.File
 
-var encoding_candidate = []string{"utf-8", "gbk", "big5", "shift-jis"}
+var encoding_candidate = []string{"utf-8", "big5", "shift-jis", "gbk"}
 
 var logger = log.New(os.Stderr, "", 0)
 
