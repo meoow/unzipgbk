@@ -51,6 +51,7 @@ func main() {
 
 			var utf8name string
 			var enc_err error
+
 			for _, file := range rzip.File {
 			DETERMINE_ENC:
 				if encoding == "" {
@@ -61,12 +62,14 @@ func main() {
 							break
 						}
 					}
+
 					if enc_err != nil {
 						logger.Print(enc_err)
 						return
 					}
 				} else {
 					utf8name, enc_err = iconv.Conv(file.Name, "utf-8", encoding)
+
 					if enc_err != nil {
 						encoding = ""
 						goto DETERMINE_ENC
@@ -74,7 +77,13 @@ func main() {
 				}
 				if strings.HasSuffix(file.Name, "/") {
 					os.MkdirAll(utf8name, 0755)
+
 				} else {
+					filedir := filepath.Dir(utf8name)
+					if _, err := os.Stat(filedir); err != nil {
+						os.MkdirAll(filedir, 0755)
+					}
+
 					err := extractZip(utf8name, file)
 					if err != nil {
 						logger.Print(err)
