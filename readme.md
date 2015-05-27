@@ -3,6 +3,8 @@
 
 The codec of filename inside zip file are detected automatically, or you can use `-c` to give specific codec, but forcing wrong codec will fail to extract the file.
 
+Reference to `iconv --list` to get a list of full supported codecs.
+
 ### Install
 ```sh
 go get github.com/meoow/unzipgbk
